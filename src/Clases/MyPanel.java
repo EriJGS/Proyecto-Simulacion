@@ -32,8 +32,8 @@ public class MyPanel extends JPanel {
         salchicha = new MiMonito("s", "imagenes/salchicha.png");
         pan = new MiMonito("pan", "imagenes/pan.jpg");
         tocino = new MiMonito("tocino", "imagenes/tocino.png");
-        persona = new MiMonito("animacion", "imagenes/user.png");
-        persona2 = new MiMonito("animacion", "imagenes/user2.png");
+        persona = new MiMonito("cocinera", "imagenes/user.png");
+        persona2 = new MiMonito("ayudante", "imagenes/user2.png");
         calentar = new MiMonito("calentar", "imagenes/calentarpan.png");
         guisar = new MiMonito("guisar", "imagenes/guisarsalchicha.png");
 
@@ -107,7 +107,7 @@ public class MyPanel extends JPanel {
         cdaM.setBounds(235, 136, 40, 25);
         // Persona el label que se mueve como animacion
         persona.setBounds(85, 40, 80, 40);
-        persona2.setBounds(425, 40, 80, 40);
+        persona2.setBounds(30, 40, 80, 40);
         // end label animacion de persona
         calentar.setBounds(85, 90, 80, 40);
         guisar.setBounds(255, 90, 90, 40);
@@ -259,11 +259,15 @@ public class MyPanel extends JPanel {
         //CODIGO DEL THREAD SIMULACION
         principal.innit();
         persona.innit();
-        persona2.innit();
         persona.txtIngredientes = inputs;
         persona.txtTiempos = configuraciones;
-        persona.lblProgreso = lblProgreso;
+//        persona.lblProgreso = lblProgreso;
+        persona2.innit();
+        persona2.txtIngredientes = inputs;
+        persona2.txtTiempos = configuraciones;
+//        persona2.lblProgreso = lblProgreso;
         principal.monito = persona;
+        principal.monito2 = persona2;
         principal.txtIngredientes = inputs;
         principal.addActionListener(principal);
 

@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 public class MiBoton extends JButton implements ActionListener {
 
-    public MiMonito monito;
+    public MiMonito monito, monito2;
     private String name;
     JTextField[] txtIngredientes;
 
@@ -36,7 +36,9 @@ public class MiBoton extends JButton implements ActionListener {
             // Solo validamos que haya ingredientes disponibles
             if (verificarCantidades()) {
                 Thread t = new Thread(monito, name);
+                Thread t2 = new Thread(monito2, name);
                 t.start();
+                t2.start();
             } else {
                 JOptionPane.showMessageDialog(null, "Verifique la cantidad de ingredientes porfavor");
             }
