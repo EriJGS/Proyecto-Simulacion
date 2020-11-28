@@ -41,40 +41,6 @@ public class MiMonito extends JLabel implements Runnable {
         }
     }
 
-    public void bloquear(JTextField[] inputsI, JTextField[] inputsC) {
-        for (int i = 0; i < inputsI.length; i++) {
-            inputsI[i].setEnabled(false);
-            inputsI[i].setBackground(Color.white);
-        }
-        for (int i = 0; i < inputsC.length; i++) {
-            inputsC[i].setEnabled(false);
-            inputsC[i].setBackground(Color.white);
-        }
-        btnPrincipal.setEnabled(false);
-        btnEditT.setEnabled(false);
-        btnEditC.setEnabled(false);
-        btnResetT.setEnabled(false);
-        btnResetC.setEnabled(false);
-        btnReset.setEnabled(false);
-        btnGuardar.setEnabled(false);
-        btnStop.setEnabled(true);
-    }
-
-    public void desbloquear(JTextField[] inputsI, JTextField[] inputsC) {
-        for (int i = 0; i < inputsI.length; i++) {
-            inputsI[i].setBackground(Color.white);
-        }
-        for (int i = 0; i < inputsC.length; i++) {
-            inputsC[i].setBackground(Color.white);
-        }
-        btnPrincipal.setEnabled(true);
-        btnEditT.setEnabled(true);
-        btnEditC.setEnabled(true);
-        btnReset.setEnabled(true);
-        btnGuardar.setEnabled(true);
-        btnStop.setEnabled(false);
-    }
-
     @Override
     public void run() {
         //lblProgreso.setVisible(true);
@@ -253,18 +219,16 @@ public class MiMonito extends JLabel implements Runnable {
                 
                 // Tareas a realizar del ayudante
                 if(name == "ayudante") {
-                    System.out.println("Entro el ayudante");
+//                    System.out.println("Entro el ayudante");
                     
                     this.setBounds(425, 40, 80, 40);
 
                     cCebolla.setCantidad(cCebolla.getCantidad() - 1);
-                    // Tiempos de cebolla
                     try { Thread.sleep(tPicarCebolla); } catch (Exception e) { }
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     try { Thread.sleep(tAplicarCebolla); } catch (Exception e) { }
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     inputCebolla.setText("" + cCebolla.getCantidad());
-                  //  x += 60;
                     this.setBounds(480, 40, 80, 40);
 
                     cTomate.setCantidad(cTomate.getCantidad() - 1);
@@ -273,17 +237,14 @@ public class MiMonito extends JLabel implements Runnable {
                     try { Thread.sleep(tAplicarTomate); } catch (Exception e) { }
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     inputTomate.setText("" + cTomate.getCantidad());
-                  //  x += 60;
                     this.setBounds(535, 40, 80, 40);
 
                     cLechuga.setCantidad(cLechuga.getCantidad() - 1);
-                    // Tiempos de la lechuga
                     try { Thread.sleep(tPicarLechuga); } catch (Exception e) { }
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     try { Thread.sleep(tAplicarLechuga); } catch (Exception e) { }
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     inputLechuga.setText("" + cLechuga.getCantidad());
-                  //  x += 60;
                     this.setBounds(590, 40, 80, 40);
 
                     cCondimentos.setCantidad(cCondimentos.getCantidad() - 1);
@@ -408,9 +369,9 @@ public class MiMonito extends JLabel implements Runnable {
 
         }
         
-        if (name == "ayudante") {
-           this.setBounds(30, 40, 80, 40);
-        }
+//        if (name == "ayudante") {
+//           this.setBounds(30, 40, 80, 40);
+//        }
 
         // Solo quitamos el lbl ya que acabe las iteraciones
         //lblProgreso.setVisible(false);

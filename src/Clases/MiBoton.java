@@ -1,6 +1,7 @@
 package Clases;
 
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -11,7 +12,17 @@ public class MiBoton extends JButton implements ActionListener {
 
     public MiMonito monito, monito2;
     private String name;
-    JTextField[] txtIngredientes;
+    JTextField[] txtIngredientes, txtTiempos;
+
+    /* Botones */
+    MiBoton btnPrincipal;
+    JButton btnEditT = new JButton("");
+    JButton btnEditC = new JButton("");
+    JButton btnResetT = new JButton("");
+    JButton btnResetC = new JButton("");
+    JButton btnReset = new JButton("");
+    JButton btnGuardar = new JButton("");
+    JButton btnStop = new JButton("");
 
     MiBoton(String texto) {
         this.name = texto;
@@ -39,6 +50,8 @@ public class MiBoton extends JButton implements ActionListener {
                 Thread t2 = new Thread(monito2, name);
                 t.start();
                 t2.start();
+                
+                bloquear(txtIngredientes, txtTiempos);
             } else {
                 JOptionPane.showMessageDialog(null, "Verifique la cantidad de ingredientes porfavor");
             }
@@ -73,4 +86,26 @@ public class MiBoton extends JButton implements ActionListener {
             return false;
         }
     }
+    
+    
+    // Metodos para bloquar
+    public void bloquear(JTextField[] inputsI, JTextField[] inputsC) {
+        for (int i = 0; i < inputsI.length; i++) {
+            inputsI[i].setEnabled(false);
+            inputsI[i].setBackground(Color.white);
+        }
+        for (int i = 0; i < inputsC.length; i++) {
+            inputsC[i].setEnabled(false);
+            inputsC[i].setBackground(Color.white);
+        }
+        btnPrincipal.setEnabled(false);
+        btnEditT.setEnabled(false);
+        btnEditC.setEnabled(false);
+        btnResetT.setEnabled(false);
+        btnResetC.setEnabled(false);
+        btnReset.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnStop.setEnabled(true);
+    }
+    
 }

@@ -19,7 +19,7 @@ public class MyPanel extends JPanel {
 
     public MyPanel() {
         //construct components
-        nuevosInput = new JButton("Editar cantidades") ;
+        nuevosInput = new JButton("Editar cantidades");
         reset = new JButton("Reset General");
         stop = new JButton("Stop");
 
@@ -37,7 +37,7 @@ public class MyPanel extends JPanel {
         calentar = new MiMonito("calentar", "imagenes/calentarpan.png");
         guisar = new MiMonito("guisar", "imagenes/guisarsalchicha.png");
 
-        ImageIcon image = new ImageIcon("imagenes/dogo.png") ;
+        ImageIcon image = new ImageIcon("imagenes/dogo.png");
         jcomp53 = new JLabel(image);
 
         cantL = new JLabel("/12");
@@ -269,6 +269,7 @@ public class MyPanel extends JPanel {
         principal.monito = persona;
         principal.monito2 = persona2;
         principal.txtIngredientes = inputs;
+        principal.txtTiempos = configuraciones;
         principal.addActionListener(principal);
 
         // Pasar botones a MiMonito para desactivar/activar al "comenzar"
@@ -281,14 +282,26 @@ public class MyPanel extends JPanel {
         persona.btnGuardar = guardar;
         persona.btnStop = stop;
 
+        principal.btnPrincipal = principal;
+        principal.btnEditT = editar;
+        principal.btnEditC = nuevosInput;
+        principal.btnReset = reset;
+        principal.btnResetT = cancelar;
+        principal.btnResetC = cancelarC;
+        principal.btnGuardar = guardar;
+        principal.btnStop = stop;
+        
 
-        //CODIGO FUNCIONES DE LA CONFIGURACION (TIEMPOS)
-        editar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Aqui va el codigo de la accion
-                desbloquearConfiguraciones(configuraciones);
-            }
-        });
+    //CODIGO FUNCIONES DE LA CONFIGURACION (TIEMPOS)
+    editar.addActionListener ( new ActionListener() {
+            
+
+    public void actionPerformed(ActionEvent e) {
+        // Aqui va el codigo de la accion
+        desbloquearConfiguraciones(configuraciones);
+    }
+}
+);
 
         cancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -332,6 +345,7 @@ public class MyPanel extends JPanel {
             System.out.println("Entré al listener");
             persona.stopHilo();
             persona2.stopHilo();
+              desbloquearBotonesInputs(inputs, configuraciones);
           }
         });
 
@@ -476,4 +490,21 @@ public class MyPanel extends JPanel {
             }
         }
     }
+    
+     public void desbloquearBotonesInputs(JTextField[] inputsI, JTextField[] inputsC) {
+        for (int i = 0; i < inputsI.length; i++) {
+            inputsI[i].setBackground(Color.white);
+        }
+        for (int i = 0; i < inputsC.length; i++) {
+            inputsC[i].setBackground(Color.white);
+        }
+        principal.setEnabled(true);
+        editar.setEnabled(true);
+        nuevosInput.setEnabled(true);
+        reset.setEnabled(true);
+        cancelar.setEnabled(true);
+        guardar.setEnabled(false);
+        stop.setEnabled(false);
+    }
+    
 }
