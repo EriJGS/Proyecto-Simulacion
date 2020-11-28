@@ -13,7 +13,8 @@ public class MiBoton extends JButton implements ActionListener {
     public MiMonito monito, monito2;
     private String name;
     JTextField[] txtIngredientes, txtTiempos;
-
+    Resultados resultados;
+    
     /* Botones */
     MiBoton btnPrincipal;
     JButton btnEditT = new JButton("");
@@ -46,8 +47,10 @@ public class MiBoton extends JButton implements ActionListener {
             System.out.println("Hey soy el Ancton Event del thread");
             // Solo validamos que haya ingredientes disponibles
             if (verificarCantidades()) {
+          
                 Thread t = new Thread(monito, name);
                 Thread t2 = new Thread(monito2, name);
+                
                 t.start();
                 t2.start();
                 

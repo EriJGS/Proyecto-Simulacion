@@ -16,6 +16,7 @@ public class MyPanel extends JPanel {
     private JLabel jcomp3, jcomp22, jcomp25, jcomp26, jcomp27, jcomp28, jcomp29,
             jcomp36, jcomp37, jcomp40, jcomp41, jcomp42, jcomp43, jcomp53, cdaM, cdaC, pzaP, pzaT, pzaS, cantC, cantT, cantL, lblProgreso;
     private JButton editar, guardar, cancelar, salir, nuevosInput, reset, cancelarC, stop;
+    private Resultados resultados = new Resultados();
 
     public MyPanel() {
         //construct components
@@ -261,10 +262,12 @@ public class MyPanel extends JPanel {
         persona.innit();
         persona.txtIngredientes = inputs;
         persona.txtTiempos = configuraciones;
+        persona.resultados = resultados;
 //        persona.lblProgreso = lblProgreso;
         persona2.innit();
         persona2.txtIngredientes = inputs;
         persona2.txtTiempos = configuraciones;
+        persona2.resultados = resultados;
 //        persona2.lblProgreso = lblProgreso;
         principal.monito = persona;
         principal.monito2 = persona2;
@@ -273,15 +276,6 @@ public class MyPanel extends JPanel {
         principal.addActionListener(principal);
 
         // Pasar botones a MiMonito para desactivar/activar al "comenzar"
-        persona.btnPrincipal = principal;
-        persona.btnEditT = editar;
-        persona.btnEditC = nuevosInput;
-        persona.btnReset = reset;
-        persona.btnResetT = cancelar;
-        persona.btnResetC = cancelarC;
-        persona.btnGuardar = guardar;
-        persona.btnStop = stop;
-
         principal.btnPrincipal = principal;
         principal.btnEditT = editar;
         principal.btnEditC = nuevosInput;
@@ -290,6 +284,18 @@ public class MyPanel extends JPanel {
         principal.btnResetC = cancelarC;
         principal.btnGuardar = guardar;
         principal.btnStop = stop;
+        
+        resultados.txtIngredientes = inputs;
+        resultados.txtTiempos = configuraciones;
+        resultados.btnPrincipal = principal;
+        resultados.btnEditT = editar;
+        resultados.btnEditC = nuevosInput;
+        resultados.btnReset = reset;
+        resultados.btnResetT = cancelar;
+        resultados.btnResetC = cancelarC;
+        resultados.btnGuardar = guardar;
+        resultados.btnStop = stop;
+
         
 
     //CODIGO FUNCIONES DE LA CONFIGURACION (TIEMPOS)
@@ -345,7 +351,8 @@ public class MyPanel extends JPanel {
             System.out.println("Entré al listener");
             persona.stopHilo();
             persona2.stopHilo();
-              desbloquearBotonesInputs(inputs, configuraciones);
+            resultados.statusMensaje = true;
+            desbloquearBotonesInputs(inputs, configuraciones);
           }
         });
 
@@ -360,7 +367,7 @@ public class MyPanel extends JPanel {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        frame.setVisible(true);        
     }
 
     private void setStage(MiMonito[] labelsCantidades, JTextField[] configuraciones, JTextField[] inputs) {

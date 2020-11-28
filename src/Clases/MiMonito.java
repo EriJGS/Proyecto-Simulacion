@@ -16,15 +16,7 @@ public class MiMonito extends JLabel implements Runnable {
     private ImageIcon imagenIcon;
     JTextField[] txtIngredientes, txtTiempos;
     JLabel lblProgreso;
-    // Botones de MyPanel para desactivar/activar
-    MiBoton btnPrincipal;
-    JButton btnEditT = new JButton("");
-    JButton btnEditC = new JButton("");
-    JButton btnResetT = new JButton("");
-    JButton btnResetC = new JButton("");
-    JButton btnReset = new JButton("");
-    JButton btnGuardar = new JButton("");
-    JButton btnStop = new JButton("");
+    Resultados resultados;
 
     public MiMonito(String name, String url) {
         this.name = name;
@@ -181,7 +173,7 @@ public class MiMonito extends JLabel implements Runnable {
                 
                 // Tareas a realizar de la cocinera   
                 if (name == "cocinera") {
-             
+                    
                     cPan.setCantidad(cPan.getCantidad() - 1);
                     try { Thread.sleep(tPrepararPan); } catch (Exception e) { }
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
@@ -219,7 +211,6 @@ public class MiMonito extends JLabel implements Runnable {
                 
                 // Tareas a realizar del ayudante
                 if(name == "ayudante") {
-//                    System.out.println("Entro el ayudante");
                     
                     this.setBounds(425, 40, 80, 40);
 
@@ -259,169 +250,26 @@ public class MiMonito extends JLabel implements Runnable {
             } else {
                JOptionPane.showMessageDialog(null, "Las cantidades no pueden ser cero");
             }
-            
-            
-         // Las cantidades deben ser cero para que el ciclo se detenga cuando queden 0 ingredientes
-            /*if (cebolla >= 0 && tomate >= 0 && lechuga >= 0 && mayonesa >= 0 && condimentos >= 0 && tocino >= 0 && pan >= 0 && salchicha >= 0 &&
-                tPicarTomate > 0 && tPicarCebolla > 0 && tPicarLechuga > 0 && tAplicarTomate > 0 && tAplicarCebolla > 0 && tAplicarLechuga > 0 && tAplicarMayonesa > 0 &&
-                tAplicarCondimentos > 0 && tAplicarTocino > 0 && tPrepararPan > 0 && tAplicarPan > 0 && tPrepararSalchicha > 0 && tAplicarSalchicha > 0) {
-                //System.out.println("Estas dentro de la simulacion");
-
-                cPan.setCantidad(cPan.getCantidad() - 1);
-                // Tiempos del pan
-                try { Thread.sleep(tPrepararPan); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                this.setBounds(140, 40, 80, 40);
-
-                try { Thread.sleep(tAplicarPan); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                inputPan.setText("" + cPan.getCantidad());
-              //  x += 60;
-                this.setBounds(200, 40, 80, 40);
-
-                cMayonesa.setCantidad(cMayonesa.getCantidad() - 1);
-                try { Thread.sleep(tAplicarMayonesa); } catch (Exception e) {}
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                inputMayonesa.setText("" + cMayonesa.getCantidad());
-               // x += 60;
-                this.setBounds(255, 40, 80, 40);
-
-                try { Thread.sleep(tPrepararSalchicha); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                this.setBounds(305, 40, 80, 40);
-
-                cTocino.setCantidad(cTocino.getCantidad() - 1);
-                try { Thread.sleep(tAplicarTocino); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                inputTocino.setText("" + cTocino.getCantidad());
-             //   x += 60;
-                this.setBounds(370, 40, 80, 40);
-
-                cSalchicha.setCantidad(cSalchicha.getCantidad() - 1);
-                // Tiempo de la salchicha
-                try { Thread.sleep(tAplicarSalchicha); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                inputSalchicha.setText("" + cSalchicha.getCantidad());
-               // x += 60;
-                this.setBounds(425, 40, 80, 40);
-
-                cCebolla.setCantidad(cCebolla.getCantidad() - 1);
-                // Tiempos de cebolla
-                try { Thread.sleep(tPicarCebolla); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                try { Thread.sleep(tAplicarCebolla); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                inputCebolla.setText("" + cCebolla.getCantidad());
-              //  x += 60;
-                this.setBounds(480, 40, 80, 40);
-
-                cTomate.setCantidad(cTomate.getCantidad() - 1);
-                try { Thread.sleep(tPicarTomate); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                try { Thread.sleep(tAplicarTomate); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                inputTomate.setText("" + cTomate.getCantidad());
-              //  x += 60;
-                this.setBounds(535, 40, 80, 40);
-
-                cLechuga.setCantidad(cLechuga.getCantidad() - 1);
-                // Tiempos de la lechuga
-                try { Thread.sleep(tPicarLechuga); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                try { Thread.sleep(tAplicarLechuga); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                inputLechuga.setText("" + cLechuga.getCantidad());
-              //  x += 60;
-                this.setBounds(590, 40, 80, 40);
-
-                cCondimentos.setCantidad(cCondimentos.getCantidad() - 1);
-                try { Thread.sleep(tAplicarCondimentos); } catch (Exception e) { }
-                try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
-                inputCondimentos.setText("" + cCondimentos.getCantidad());
-                this.setBounds(85, 40, 80, 40);
-
-                cHotDogs.setCantidad(cHotDogs.getCantidad() - 1);
-                inputHotDogs.setText("" + cHotDogs.getCantidad());
-                dogosPreparados++;
-                //System.out.println("HotDogs preparados: " + i + "\n Cantidad de cebolla que queda: " + cebolla);
-                // System.out.println("cebolla usada: " + cebollaAcumulada);
-
-                // Acumulacion de tiempos totales
-                tiempoTotal += (tPicarTomate + tPicarCebolla + tPicarLechuga + tAplicarTomate + tAplicarCebolla + tAplicarLechuga + tAplicarMayonesa + tAplicarCondimentos + tAplicarTocino
-                                + tPrepararPan + tAplicarPan + tPrepararSalchicha + tAplicarSalchicha) / 1000;
-                tiemposTomate += (tPicarTomate + tPicarTomate) / 1000;
-                tiemposCebolla += (tPicarCebolla + tAplicarCebolla) / 1000;
-                tiemposLechuga += (tPicarLechuga + tAplicarCebolla) / 1000;
-                tiemposCondimentos += tAplicarCondimentos / 1000;
-                tiemposMayonesa += tAplicarMayonesa / 1000;
-                tiemposTocino += tAplicarTocino / 1000;
-                tiemposPan += (tPrepararPan + tAplicarPan) / 1000;
-                tiemposSalchicha += (tPrepararSalchicha + tAplicarSalchicha) / 1000;
-
-            } else {
-                System.out.println("Faltan ingredientes");
-                JOptionPane.showMessageDialog(null, "\n FALTAN INGREDIENTES. \n" +
-                        "\n Faltaron de preparar " + (hotdogs - (i -1))+ " HotDog(s)");
-
-                //Se añadio el break para cancelar el ciclo for
-                break;
-            }*/
 
         }
         
-//        if (name == "ayudante") {
-//           this.setBounds(30, 40, 80, 40);
-//        }
-
-        // Solo quitamos el lbl ya que acabe las iteraciones
-        //lblProgreso.setVisible(false);
-
-/*        if ( dogosPreparados == hotdogs) { //Ingredientes y Pedidos IGUALES && Ingredientes son mayores
-            JOptionPane.showMessageDialog(null," \n SE PREPARARON " + dogosPreparados + " HOTDOG(S) \n" +
-             "\n QUEDARON LOS SIGUIENTES INGREDIENTES : \n" +
-            (pan ) + " Piezas de Pan \n" +
-            (mayonesa) + " cda(s) de mayonesa \n"+
-            (tocino) + " Tiras de Tocino \n"+
-            (salchicha) + " Salchichas \n"+
-            (cebolla ) + "/4 de Cebolla \n"+
-            (tomate ) + "/4 de Tomate \n"+
-            (lechuga ) + "/12 de Lechuga \n" +
-            (condimentos ) + " cda(s) de Aderezo \n" +
-
-            "\n INGREDIENTES QUE SE UTILIZARON Y TIEMPOS DE LAS TAREAS: \n" +
-            (panAcumulado ) + " Piezas de Pan (" + tiemposPan + " seg)\n" +
-            (mayonesaAcumulada ) + " cda(s) de mayonesa (" + tiemposMayonesa + " seg) \n"+
-            (tocinoAcumulado ) + " Tiras de Tocino (" + tiemposTocino + " seg) \n"+
-            (salchichaAcumulada ) + " Salchichas (" + tiemposSalchicha + " seg) \n"+
-            (cebollaAcumulada ) + "/4 de Cebolla (" + tiemposCebolla + " seg) \n"+
-            (tomateAcumulado ) + "/4 de Tomate (" + tiemposTomate + " seg) \n"+
-            (lechugaAcumulada ) + "/12 de Lechuga (" + tiemposLechuga + " seg)\n" +
-            (condimentosAcumulados ) + " cda(s) de Aderezo (" + tiemposCondimentos + " seg)\n" +
-             "\tTiempo de la simulacion: " + tiempoTotal + " segundos");
-
-        } else { // Los pedidos son mayores
-             JOptionPane.showMessageDialog(null," \n SE PREPARARON " + dogosPreparados + " HOTDOG(S) \n" +
-             "\n QUEDARON LOS SIGUIENTES INGREDIENTES: \n" +
-            (pan +1) + " Piezas de Pan \n" +
-            (mayonesa +1) + " cda(s) de mayonesa \n"+
-            (tocino +1) + " Tiras de Tocino \n"+
-            (salchicha +1) + " Salchichas \n"+
-            (cebolla +1) + "/4 de Cebolla \n"+
-            (tomate +1) + "/4 de Tomate \n"+
-            (lechuga +1) + "/12 de Lechuga \n" +
-            (condimentos +1) + " cda(s) de Aderezo \n" +
-
-            "\n INGREDIENTES QUE SE UTILIZARON Y TIEMPOS DE LAS TAREAS: \n" +
-            (panAcumulado -1) + " Piezas de Pan (" + tiemposPan + " seg)\n" +
-            (mayonesaAcumulada -1) + " cda(s) de mayonesa (" + tiemposMayonesa + " seg)\n"+
-            (tocinoAcumulado -1) + " Tiras de Tocino (" + tiemposTocino + " seg)\n"+
-            (salchichaAcumulada -1) + " Salchichas (" + tiemposSalchicha + " seg)\n"+
-            (cebollaAcumulada -1) + "/4 de Cebolla (" + tiemposCebolla + " seg)\n"+
-            (tomateAcumulado -1) + "/4 de Tomate (" + tiemposTomate + " seg)\n"+
-            (lechugaAcumulada -1) + "/12 de Lechuga (" + tiemposLechuga + " seg)\n" +
-            (condimentosAcumulados -1) + " cda(s) de Aderezo (" + tiemposCondimentos + " seg)\n"+
-             "\tTiempo de la simulacion: " + tiempoTotal + " segundos");
-
-        }*/
+        // Verificamos que hayan terminados los dos Threads
+        if (name == "cocinera"){
+            resultados.statusCocinero = true;
+            this.setBounds(85, 40, 80, 40);
+            //System.out.println("Cocinera: " + resultados );
+        }
+        
+        if (name == "ayudante") {
+            resultados.statusAydante = true;
+            this.setBounds(30, 40, 80, 40);
+            //System.out.println("Ayudante: " + resultados);
+        }
+        
+        if (resultados.terminaronAmbosThreads()) {
+            resultados.mostrarResultados();
+            
+        }
+        
     }
 }
