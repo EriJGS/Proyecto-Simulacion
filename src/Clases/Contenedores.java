@@ -16,11 +16,11 @@ public class Contenedores {
         this.name = name;
     }
 
-    public void setCantidad(int cantidad) {
+    public synchronized void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
-    public int getCantidad() {
+    public synchronized int getCantidad() {
         return cantidad;
     }
 

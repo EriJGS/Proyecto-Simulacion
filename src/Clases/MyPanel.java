@@ -253,7 +253,7 @@ public class MyPanel extends JPanel {
                 agregarVerificadoresC(inputs);
             }
         });
-
+                
         lblProgreso.setVisible(false);
         lblProgreso.setBackground(Color.GREEN);
         lblProgreso.setOpaque(true);
@@ -263,12 +263,16 @@ public class MyPanel extends JPanel {
         persona.txtIngredientes = inputs;
         persona.txtTiempos = configuraciones;
         persona.resultados = resultados;
+         
+        
 //        persona.lblProgreso = lblProgreso;
         persona2.innit();
         persona2.txtIngredientes = inputs;
         persona2.txtTiempos = configuraciones;
         persona2.resultados = resultados;
 //        persona2.lblProgreso = lblProgreso;
+
+
         principal.monito = persona;
         principal.monito2 = persona2;
         principal.txtIngredientes = inputs;

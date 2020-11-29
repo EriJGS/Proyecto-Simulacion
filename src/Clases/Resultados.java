@@ -19,8 +19,8 @@ public class Resultados {
     public boolean statusCocinero = false, statusAydante = false;
     public JTextField[] txtIngredientes, txtTiempos;
     public Thread tCocinero, tAyudante;
-    public boolean statusMensaje = false;
-    
+    public boolean statusMensaje = false, acabaronIngredientesCocinera = false, acabaronIngredientesAyudante = false;
+    public boolean medioDogoCocinera = false, medioDogoAyudante = false;
     MiBoton btnPrincipal;
     JButton btnEditT;
     JButton btnEditC;
@@ -29,11 +29,23 @@ public class Resultados {
     JButton btnReset;
     JButton btnGuardar;
     JButton btnStop;
-
-    Resultados() {
-
+    
+    
+    public boolean dogoCompleto() {
+        if (medioDogoAyudante && medioDogoCocinera) {
+            medioDogoAyudante = medioDogoCocinera = false;
+            return true;
+        }
+        return false;
     }
-
+    
+    public void ingredientesTerminados() {
+        if (acabaronIngredientesCocinera && acabaronIngredientesAyudante) {
+            JOptionPane.showMessageDialog(null, "Verifica la cantidad de ingredientes porfavor");
+            acabaronIngredientesAyudante = acabaronIngredientesCocinera = false;
+        }   
+    }
+    
     public boolean terminaronAmbosThreads() {
         System.out.println(statusCocinero);
         System.out.println(statusAydante);
@@ -46,13 +58,12 @@ public class Resultados {
     public void mostrarResultados() {
         
         if (statusMensaje) {
+            statusMensaje = false;
             JOptionPane.showMessageDialog(null, "SIMULACION DETENIDA");
         } else {
+            statusAydante = statusCocinero = false;
             JOptionPane.showMessageDialog(null, "RESULTADOS DE LA SIMULACION");
-        }
-      
-        statusMensaje = statusAydante = statusCocinero = false;
-        
+        }        
         desbloquearBotonesInputs(txtIngredientes, txtTiempos);
     }
 

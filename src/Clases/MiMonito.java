@@ -17,6 +17,10 @@ public class MiMonito extends JLabel implements Runnable {
     JTextField[] txtIngredientes, txtTiempos;
     JLabel lblProgreso;
     Resultados resultados;
+    
+//    public Contenedores cCebolla, cTomate, cLechuga, cMayonesa, cCondimentos, cTocino, 
+//            cPan, cSalchicha, cHotDogs;
+    
 
     public MiMonito(String name, String url) {
         this.name = name;
@@ -34,7 +38,8 @@ public class MiMonito extends JLabel implements Runnable {
     }
 
     @Override
-    public void run() {
+    public void run() {        
+        
         //lblProgreso.setVisible(true);
         chambaAnimacion();
     }
@@ -143,7 +148,7 @@ public class MiMonito extends JLabel implements Runnable {
         System.out.println(tPicarTomate);
 
         for (int i = 1; i <= ciclos; i++) {
-
+            
             // Por cada ciclo va quitando cada ingrediente usado
             cebolla = cebolla - 1;
             tomate = tomate - 1;
@@ -164,7 +169,7 @@ public class MiMonito extends JLabel implements Runnable {
             panAcumulado++;
             salchichaAcumulada++;
             
-                        
+            
             if (cebolla >= 0 && tomate >= 0 && lechuga >= 0 && mayonesa >= 0 && condimentos >= 0 && tocino >= 0 && pan >= 0 && salchicha >= 0 &&
                 tPicarTomate > 0 && tPicarCebolla > 0 && tPicarLechuga > 0 && tAplicarTomate > 0 && tAplicarCebolla > 0 && tAplicarLechuga > 0 && tAplicarMayonesa > 0 &&
                 tAplicarCondimentos > 0 && tAplicarTocino > 0 && tPrepararPan > 0 && tAplicarPan > 0 && tPrepararSalchicha > 0 && tAplicarSalchicha > 0) {
@@ -205,7 +210,8 @@ public class MiMonito extends JLabel implements Runnable {
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     inputSalchicha.setText("" + cSalchicha.getCantidad());
                     this.setBounds(85, 40, 80, 40);
-               
+                    
+                    resultados.medioDogoCocinera = true;
                 }
                 // Fin de las tareas de la cocinera
                 
@@ -243,12 +249,29 @@ public class MiMonito extends JLabel implements Runnable {
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     inputCondimentos.setText("" + cCondimentos.getCantidad());
                     this.setBounds(485, 40, 80, 40);
-
+                    
+                    resultados.medioDogoAyudante = true;
                 }
                 // Fin de las tareas a realizar del ayudante
             
+                
+                // Decremento de dogos
+                if (resultados.dogoCompleto()) {
+                    
+                    int dogos = Integer.parseInt(inputHotDogs.getText());
+                    System.out.println("dogos");
+                    inputHotDogs.setText(Integer.toString(dogos - 1));
+                }
+                
             } else {
-               JOptionPane.showMessageDialog(null, "Las cantidades no pueden ser cero");
+                if (name == "cocinera") {
+                    resultados.acabaronIngredientesCocinera = true;
+                }
+                if (name == "ayudante") {
+                    resultados.acabaronIngredientesAyudante = true;
+                }
+                
+                resultados.ingredientesTerminados();
             }
 
         }
@@ -268,7 +291,6 @@ public class MiMonito extends JLabel implements Runnable {
         
         if (resultados.terminaronAmbosThreads()) {
             resultados.mostrarResultados();
-            
         }
         
     }
