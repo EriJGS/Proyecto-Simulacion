@@ -65,10 +65,8 @@ public class Resultados {
         }
 
         btnPrincipal.setEnabled(true);
-//        btnEditT.setEnabled(true);
-//        btnEditC.setEnabled(true);
-        btnResetT.setEnabled(true);
-        btnResetC.setEnabled(true);
+        btnEditT.setEnabled(true);
+        btnEditC.setEnabled(true);
         btnReset.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnStop.setEnabled(false);

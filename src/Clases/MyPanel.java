@@ -297,17 +297,14 @@ public class MyPanel extends JPanel {
         resultados.btnStop = stop;
 
         
-
-    //CODIGO FUNCIONES DE LA CONFIGURACION (TIEMPOS)
-    editar.addActionListener ( new ActionListener() {
-            
-
-    public void actionPerformed(ActionEvent e) {
-        // Aqui va el codigo de la accion
-        desbloquearConfiguraciones(configuraciones);
-    }
-}
-);
+        //CODIGO FUNCIONES DE LA CONFIGURACION (TIEMPOS)
+        editar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Aqui va el codigo de la accion
+                desbloquearConfiguraciones(configuraciones);
+            }
+        }
+        );
 
         cancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -508,8 +505,6 @@ public class MyPanel extends JPanel {
         principal.setEnabled(true);
         editar.setEnabled(true);
         nuevosInput.setEnabled(true);
-        reset.setEnabled(true);
-        cancelar.setEnabled(true);
         guardar.setEnabled(false);
         stop.setEnabled(false);
     }
