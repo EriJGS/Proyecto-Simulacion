@@ -31,9 +31,9 @@ public class Resultados {
     JButton btnStop;
     JLabel lblProgreso;
     JTextField inputDogos;
-    
+
     int totalCocinera, totalAyudante, totalDogos;
-  
+
     public void incremetarDogos() {
         int total = totalAyudante + totalCocinera;
         if (total % 2 == 0) {
@@ -42,37 +42,38 @@ public class Resultados {
             inputDogos.setText(Integer.toString(dogos - 1));
         }
     }
-        
+
     // Ambos threads se quederaon sin ingredientes
     public void ingredientesTerminados() {
         if (acabaronIngredientesCocinera && acabaronIngredientesAyudante) {
             JOptionPane.showMessageDialog(null, "Se acabaron los ingredientes");
             acabaronIngredientesAyudante = acabaronIngredientesCocinera = false;
-        }   
+        }
     }
-        
+
     // Verificara que ambos hayan acabado su chamba 
     public boolean terminaronAmbosThreads() {
         if (statusCocinero && statusAydante) {
-            if (simulacionDetenida) {
-                JOptionPane.showMessageDialog(null, "SIMULACION DETENIDA");
-                simulacionDetenida = false;
-                lblProgreso.setVisible(false);
-            }
             lblProgreso.setVisible(false);
             return true;
         }
         return false;
     }
-    
+
     // Metodo que mostrara todos los resultados al acabar la simulacion
     public void mostrarResultados() {
-       
-        System.out.println("Dogos:" + totalDogos);
-        statusAydante = statusCocinero = false;
-        JOptionPane.showMessageDialog(null, "RESULTADOS DE LA SIMULACION");
-        totalCocinera = totalCocinera = totalDogos = 0;
-        desbloquearBotonesInputs(txtIngredientes, txtTiempos);
+
+        if (simulacionDetenida) {
+            JOptionPane.showMessageDialog(null, "SIMULACION DETENIDA");
+            simulacionDetenida = false;
+            lblProgreso.setVisible(false);
+        } else {
+            System.out.println("Dogos:" + totalDogos);
+            statusAydante = statusCocinero = false;
+            JOptionPane.showMessageDialog(null, "RESULTADOS DE LA SIMULACION");
+            totalCocinera = totalCocinera = totalDogos = 0;
+            desbloquearBotonesInputs(txtIngredientes, txtTiempos);
+        }
     }
 
     // Metodo que desbloqueara todo al terminar la simulacion
