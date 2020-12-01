@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -14,7 +15,7 @@ public class MiBoton extends JButton implements ActionListener {
     private String name;
     JTextField[] txtIngredientes, txtTiempos;
     Resultados resultados;
-    
+    JLabel lblProgreso;
     /* Botones */
     MiBoton btnPrincipal;
     JButton btnEditT = new JButton("");
@@ -47,7 +48,7 @@ public class MiBoton extends JButton implements ActionListener {
             System.out.println("Hey soy el Ancton Event del thread");
             // Solo validamos que haya ingredientes disponibles
             if (verificarCantidades()) {
-          
+                lblProgreso.setVisible(true);
                 Thread t = new Thread(monito, name);
                 Thread t2 = new Thread(monito2, name);
                 

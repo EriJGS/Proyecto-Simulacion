@@ -7,6 +7,7 @@ package Clases;
 
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -19,8 +20,7 @@ public class Resultados {
     public boolean statusCocinero = false, statusAydante = false;
     public JTextField[] txtIngredientes, txtTiempos;
     public Thread tCocinero, tAyudante;
-    public boolean statusMensaje = false, acabaronIngredientesCocinera = false, acabaronIngredientesAyudante = false;
-    public boolean medioDogoCocinera = false, medioDogoAyudante = false;
+    public boolean acabaronIngredientesCocinera = false, acabaronIngredientesAyudante = false, simulacionDetenida = false;
     MiBoton btnPrincipal;
     JButton btnEditT;
     JButton btnEditC;
@@ -29,44 +29,38 @@ public class Resultados {
     JButton btnReset;
     JButton btnGuardar;
     JButton btnStop;
-    
-    
-    public boolean dogoCompleto() {
-        if (medioDogoAyudante && medioDogoCocinera) {
-            medioDogoAyudante = medioDogoCocinera = false;
-            return true;
-        }
-        return false;
-    }
-    
+    JLabel lblProgreso;
+        
+    // Ambos threads se quederaon sin ingredientes
     public void ingredientesTerminados() {
         if (acabaronIngredientesCocinera && acabaronIngredientesAyudante) {
-            JOptionPane.showMessageDialog(null, "Verifica la cantidad de ingredientes porfavor");
+            JOptionPane.showMessageDialog(null, "Se acabaron los ingredientes");
             acabaronIngredientesAyudante = acabaronIngredientesCocinera = false;
         }   
     }
-    
+        
+    // Verificara que ambos hayan acabado su chamba 
     public boolean terminaronAmbosThreads() {
-        System.out.println(statusCocinero);
-        System.out.println(statusAydante);
         if (statusCocinero && statusAydante) {
+            if (simulacionDetenida) {
+                JOptionPane.showMessageDialog(null, "SIMULACION DETENIDA");
+                simulacionDetenida = false;
+                lblProgreso.setVisible(false);
+            }
+            lblProgreso.setVisible(false);
             return true;
         }
         return false;
     }
-
+    
+    // Metodo que mostrara todos los resultados al acabar la simulacion
     public void mostrarResultados() {
-        
-        if (statusMensaje) {
-            statusMensaje = false;
-            JOptionPane.showMessageDialog(null, "SIMULACION DETENIDA");
-        } else {
-            statusAydante = statusCocinero = false;
-            JOptionPane.showMessageDialog(null, "RESULTADOS DE LA SIMULACION");
-        }        
+        statusAydante = statusCocinero = false;
+        JOptionPane.showMessageDialog(null, "RESULTADOS DE LA SIMULACION");
         desbloquearBotonesInputs(txtIngredientes, txtTiempos);
     }
 
+    // Metodo que desbloqueara todo al terminar la simulacion
     public void desbloquearBotonesInputs(JTextField[] inputsI, JTextField[] inputsC) {
         for (int i = 0; i < inputsI.length; i++) {
             inputsI[i].setBackground(Color.white);

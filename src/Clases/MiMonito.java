@@ -174,7 +174,7 @@ public class MiMonito extends JLabel implements Runnable {
                 tPicarTomate > 0 && tPicarCebolla > 0 && tPicarLechuga > 0 && tAplicarTomate > 0 && tAplicarCebolla > 0 && tAplicarLechuga > 0 && tAplicarMayonesa > 0 &&
                 tAplicarCondimentos > 0 && tAplicarTocino > 0 && tPrepararPan > 0 && tAplicarPan > 0 && tPrepararSalchicha > 0 && tAplicarSalchicha > 0) {
                 
-                System.out.println("Entraste a la simulacion");
+                //System.out.println("Entraste a la simulacion");
                 
                 // Tareas a realizar de la cocinera   
                 if (name == "cocinera") {
@@ -210,8 +210,6 @@ public class MiMonito extends JLabel implements Runnable {
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     inputSalchicha.setText("" + cSalchicha.getCantidad());
                     this.setBounds(85, 40, 80, 40);
-                    
-                    resultados.medioDogoCocinera = true;
                 }
                 // Fin de las tareas de la cocinera
                 
@@ -249,29 +247,21 @@ public class MiMonito extends JLabel implements Runnable {
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     inputCondimentos.setText("" + cCondimentos.getCantidad());
                     this.setBounds(485, 40, 80, 40);
-                    
-                    resultados.medioDogoAyudante = true;
                 }
                 // Fin de las tareas a realizar del ayudante
             
                 
-                // Decremento de dogos
-                if (resultados.dogoCompleto()) {
-                    
-                    int dogos = Integer.parseInt(inputHotDogs.getText());
-                    System.out.println("dogos");
-                    inputHotDogs.setText(Integer.toString(dogos - 1));
-                }
-                
+               
             } else {
+                
                 if (name == "cocinera") {
                     resultados.acabaronIngredientesCocinera = true;
                 }
                 if (name == "ayudante") {
                     resultados.acabaronIngredientesAyudante = true;
                 }
-                
                 resultados.ingredientesTerminados();
+                break;
             }
 
         }
@@ -285,11 +275,14 @@ public class MiMonito extends JLabel implements Runnable {
         
         if (name == "ayudante") {
             resultados.statusAydante = true;
-            this.setBounds(30, 40, 80, 40);
+//            this.setBounds(30, 40, 80, 40);
             //System.out.println("Ayudante: " + resultados);
         }
-        
+                
         if (resultados.terminaronAmbosThreads()) {
+            if (name == "ayudante") {
+                this.setBounds(30, 40, 80, 40);
+            }
             resultados.mostrarResultados();
         }
         

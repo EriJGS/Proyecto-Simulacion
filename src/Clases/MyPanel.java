@@ -277,8 +277,9 @@ public class MyPanel extends JPanel {
         principal.monito2 = persona2;
         principal.txtIngredientes = inputs;
         principal.txtTiempos = configuraciones;
+        principal.lblProgreso = lblProgreso;
         principal.addActionListener(principal);
-
+        
         // Pasar botones a MiMonito para desactivar/activar al "comenzar"
         principal.btnPrincipal = principal;
         principal.btnEditT = editar;
@@ -299,6 +300,7 @@ public class MyPanel extends JPanel {
         resultados.btnResetC = cancelarC;
         resultados.btnGuardar = guardar;
         resultados.btnStop = stop;
+        resultados.lblProgreso = lblProgreso;
 
         
         //CODIGO FUNCIONES DE LA CONFIGURACION (TIEMPOS)
@@ -349,10 +351,11 @@ public class MyPanel extends JPanel {
 
         stop.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
-            System.out.println("Entré al listener");
+            // System.out.println("Entré al listener");
+            persona2.setBounds(30, 40, 80, 40);
             persona.stopHilo();
             persona2.stopHilo();
-            resultados.statusMensaje = true;
+            resultados.simulacionDetenida = true;
             desbloquearBotonesInputs(inputs, configuraciones);
           }
         });
