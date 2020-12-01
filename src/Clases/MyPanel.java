@@ -301,6 +301,7 @@ public class MyPanel extends JPanel {
         resultados.btnGuardar = guardar;
         resultados.btnStop = stop;
         resultados.lblProgreso = lblProgreso;
+        resultados.inputDogos = inputCantidad;
 
         
         //CODIGO FUNCIONES DE LA CONFIGURACION (TIEMPOS)

@@ -143,7 +143,9 @@ public class MiMonito extends JLabel implements Runnable {
         int tAplicarSalchicha = (int) (Double.parseDouble(txtTiempos[12].getText()) * TIEMPO);
 
         // Tiempos acumulados
-        int tiempoTotal = 0, tiemposTomate = 0, tiemposCebolla = 0, tiemposLechuga = 0, tiemposMayonesa = 0, tiemposCondimentos = 0 , tiemposTocino = 0, tiemposPan =0, tiemposSalchicha = 0;
+        int tiempoTotal = 0, tiemposTomate = 0, tiemposCebolla = 0, tiemposLechuga = 0, 
+            tiemposMayonesa = 0, tiemposCondimentos = 0 , tiemposTocino = 0, tiemposPan =0, 
+            tiemposSalchicha = 0;
 
         System.out.println(tPicarTomate);
 
@@ -210,6 +212,8 @@ public class MiMonito extends JLabel implements Runnable {
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     inputSalchicha.setText("" + cSalchicha.getCantidad());
                     this.setBounds(85, 40, 80, 40);
+                    
+                    resultados.totalCocinera++;
                 }
                 // Fin de las tareas de la cocinera
                 
@@ -247,11 +251,12 @@ public class MiMonito extends JLabel implements Runnable {
                     try { synchronized(this) { if(stop) { break; } } } catch(Exception e) {}
                     inputCondimentos.setText("" + cCondimentos.getCantidad());
                     this.setBounds(485, 40, 80, 40);
+                    
+                    resultados.totalAyudante++;
                 }
                 // Fin de las tareas a realizar del ayudante
-            
-                
                
+                resultados.incremetarDogos();
             } else {
                 
                 if (name == "cocinera") {
@@ -278,11 +283,15 @@ public class MiMonito extends JLabel implements Runnable {
 //            this.setBounds(30, 40, 80, 40);
             //System.out.println("Ayudante: " + resultados);
         }
-                
+           
+        // Indica que la simulacion termino
         if (resultados.terminaronAmbosThreads()) {
             if (name == "ayudante") {
                 this.setBounds(30, 40, 80, 40);
             }
+          
+            // Aqui pásas los parametros
+            
             resultados.mostrarResultados();
         }
         

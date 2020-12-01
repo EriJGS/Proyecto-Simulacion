@@ -30,6 +30,18 @@ public class Resultados {
     JButton btnGuardar;
     JButton btnStop;
     JLabel lblProgreso;
+    JTextField inputDogos;
+    
+    int totalCocinera, totalAyudante, totalDogos;
+  
+    public void incremetarDogos() {
+        int total = totalAyudante + totalCocinera;
+        if (total % 2 == 0) {
+            totalDogos++;
+            int dogos = Integer.parseInt(inputDogos.getText());
+            inputDogos.setText(Integer.toString(dogos - 1));
+        }
+    }
         
     // Ambos threads se quederaon sin ingredientes
     public void ingredientesTerminados() {
@@ -55,8 +67,11 @@ public class Resultados {
     
     // Metodo que mostrara todos los resultados al acabar la simulacion
     public void mostrarResultados() {
+       
+        System.out.println("Dogos:" + totalDogos);
         statusAydante = statusCocinero = false;
         JOptionPane.showMessageDialog(null, "RESULTADOS DE LA SIMULACION");
+        totalCocinera = totalCocinera = totalDogos = 0;
         desbloquearBotonesInputs(txtIngredientes, txtTiempos);
     }
 
