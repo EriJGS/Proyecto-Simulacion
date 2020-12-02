@@ -34,6 +34,20 @@ public class Resultados {
 
     int totalCocinera, totalAyudante, totalDogos;
 
+    // Acumuladores de los ingredientes totales
+    int cebollaAcumulada = 0;
+    int tomateAcumulado = 0;
+    int lechugaAcumulada = 0;
+    int mayonesaAcumulada = 0;
+    int condimentosAcumulados = 0;
+    int tocinoAcumulado = 0;
+    int panAcumulado = 0;
+    int salchichaAcumulada = 0;
+    int tiempoAcumulado = 0;
+    
+    // Ingredientes sobrantes
+    int cPan;
+    
     public void incremetarDogos() {
         int total = totalAyudante + totalCocinera;
         if (total % 2 == 0) {
@@ -68,7 +82,27 @@ public class Resultados {
             simulacionDetenida = false;
             lblProgreso.setVisible(false);
         } else {
+            // Totales
             System.out.println("Dogos:" + totalDogos);
+            System.out.println(panAcumulado);
+            System.out.println(tocinoAcumulado);
+            System.out.println(salchichaAcumulada);
+            System.out.println(mayonesaAcumulada);
+            System.out.println(cebollaAcumulada);
+            System.out.println(tomateAcumulado);
+            System.out.println(lechugaAcumulada);
+            System.out.println(condimentosAcumulados);
+            
+            // Sobrantes
+            System.out.println("SOBRARON");
+            System.out.println("Pan: " + (cPan - panAcumulado));
+            
+            // Tiempos
+            
+            // Volvemos los acumuladores a su estado inicial
+            panAcumulado = tocinoAcumulado = salchichaAcumulada = mayonesaAcumulada = 
+            cebollaAcumulada = tomateAcumulado = lechugaAcumulada = condimentosAcumulados = 0;
+            
             statusAydante = statusCocinero = false;
             JOptionPane.showMessageDialog(null, "RESULTADOS DE LA SIMULACION");
             totalCocinera = totalCocinera = totalDogos = 0;

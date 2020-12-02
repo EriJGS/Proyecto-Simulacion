@@ -121,6 +121,11 @@ public class MiMonito extends JLabel implements Runnable {
         Acumuladores aTiempo = new Acumuladores("Acumulador tiempo");
         aTiempo.setCantidadAcumulada(tiempoAcumulado);
 
+        // Le mandamos los contenedores respecto a cada proceso
+        if (name == "cocinera") {
+            resultados.cPan = cPan.getCantidad();
+        }
+        
         int ciclos = hotdogs;
         int dogosPreparados = 0;
         int x = 85;
@@ -160,21 +165,19 @@ public class MiMonito extends JLabel implements Runnable {
             tocino = tocino - 1;
             pan = pan - 1;
             salchicha = salchicha - 1;
-
-            //Por cada ciclo va añadiendo cada ingrediente usado
-            cebollaAcumulada++;
-            tomateAcumulado++;
-            lechugaAcumulada++;
-            mayonesaAcumulada++;
-            condimentosAcumulados++;
-            tocinoAcumulado++;
-            panAcumulado++;
-            salchichaAcumulada++;
-            
             
             if (cebolla >= 0 && tomate >= 0 && lechuga >= 0 && mayonesa >= 0 && condimentos >= 0 && tocino >= 0 && pan >= 0 && salchicha >= 0 &&
                 tPicarTomate > 0 && tPicarCebolla > 0 && tPicarLechuga > 0 && tAplicarTomate > 0 && tAplicarCebolla > 0 && tAplicarLechuga > 0 && tAplicarMayonesa > 0 &&
                 tAplicarCondimentos > 0 && tAplicarTocino > 0 && tPrepararPan > 0 && tAplicarPan > 0 && tPrepararSalchicha > 0 && tAplicarSalchicha > 0) {
+            
+                cebollaAcumulada++;
+                tomateAcumulado++;
+                lechugaAcumulada++;
+                mayonesaAcumulada++;
+                condimentosAcumulados++;
+                tocinoAcumulado++;
+                panAcumulado++;
+                salchichaAcumulada++;
                 
                 //System.out.println("Entraste a la simulacion");
                 
@@ -214,6 +217,12 @@ public class MiMonito extends JLabel implements Runnable {
                     this.setBounds(85, 40, 80, 40);
                     
                     resultados.totalCocinera++;
+                    
+                    // Acumulamos los ingredientes que usaron
+                    resultados.panAcumulado++;
+                    resultados.tocinoAcumulado++;
+                    resultados.salchichaAcumulada++;
+                    resultados.mayonesaAcumulada++;
                 }
                 // Fin de las tareas de la cocinera
                 
@@ -253,6 +262,12 @@ public class MiMonito extends JLabel implements Runnable {
                     this.setBounds(485, 40, 80, 40);
                     
                     resultados.totalAyudante++;
+                    
+                    // Acumulamos los ingredientes que usaron
+                    resultados.cebollaAcumulada++;
+                    resultados.tomateAcumulado++;
+                    resultados.lechugaAcumulada++;
+                    resultados.condimentosAcumulados++;
                 }
                 // Fin de las tareas a realizar del ayudante
                
@@ -284,14 +299,20 @@ public class MiMonito extends JLabel implements Runnable {
             //System.out.println("Ayudante: " + resultados);
         }
            
+        System.out.println(cPan.getCantidad());
         // Indica que la simulacion termino
         if (resultados.terminaronAmbosThreads()) {
+            
+            if (name == "cocinera") {
+                // Le mandas los tiempos de cocinera
+            }
+            
             if (name == "ayudante") {
                 this.setBounds(30, 40, 80, 40);
+                // Le mandas los tiempos de ayudante
             }
           
             // Aqui pásas los parametros
-            
             resultados.mostrarResultados();
         }
         
