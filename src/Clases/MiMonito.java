@@ -230,10 +230,10 @@ public class MiMonito extends JLabel implements Runnable {
                     resultados.mayonesaAcumulada++;
                     
                     //Acumulador de tiempos
-                   resultados.tiemposPan += (tPrepararPan + tAplicarPan)/1000;
-                   resultados.tiemposMayonesa += tAplicarMayonesa/1000;
-                   resultados.tiemposTocino += tAplicarTocino/1000;
-                   resultados.tiemposSalchicha += (tPrepararSalchicha + tAplicarSalchicha)/1000;
+                   resultados.tiemposPan += (float)((tPrepararPan + tAplicarPan)/1000);
+                   resultados.tiemposMayonesa += (float)(tAplicarMayonesa/1000);
+                   resultados.tiemposTocino += (float)(tAplicarTocino/1000);
+                   resultados.tiemposSalchicha += (float)((tPrepararSalchicha + tAplicarSalchicha)/1000);
                 }
                 // Fin de las tareas de la cocinera
                 
@@ -281,10 +281,10 @@ public class MiMonito extends JLabel implements Runnable {
                     resultados.condimentosAcumulados++;
                     
                     //acumular tiempos
-                    resultados.tiemposCebolla += (tPicarCebolla + tAplicarCebolla)/1000;
-                    resultados.tiemposTomate += (tPicarTomate + tAplicarTomate)/1000;
-                    resultados.tiemposLechuga += (tPicarLechuga + tAplicarLechuga)/1000;
-                    resultados.tiemposCondimentos += (tAplicarCondimentos)/1000;
+                    resultados.tiemposCebolla += (float)((tPicarCebolla + tAplicarCebolla)/1000);
+                    resultados.tiemposTomate += (float)((tPicarTomate + tAplicarTomate)/1000);
+                    resultados.tiemposLechuga += (float)((tPicarLechuga + tAplicarLechuga)/1000);
+                    resultados.tiemposCondimentos += (float)(tAplicarCondimentos/1000);
                 }
                 // Fin de las tareas a realizar del ayudante
                

@@ -56,15 +56,15 @@ public class Resultados {
     int cCondimentos;
     
     //Tiempos 
-    int tiemposMayonesa = 0,
+    float tiemposMayonesa = 0,
         tiemposTocino = 0,
         tiemposPan = 0,
         tiemposSalchicha = 0,
         tiemposCebolla = 0,
         tiemposTomate = 0,
         tiemposLechuga = 0,
-        tiemposCondimentos = 0;
-    int tiempoTotal = 0;
+        tiemposCondimentos = 0,
+        tiempoTotal = 0;
     
     public void incremetarDogos() {
         int total = totalAyudante + totalCocinera;
@@ -96,8 +96,19 @@ public class Resultados {
     public void mostrarResultados() {
 
         if (simulacionDetenida) {
+            // Reinicia Tiempos
+            tiemposMayonesa = tiemposTocino = tiemposPan = tiemposSalchicha = tiemposCebolla
+                    = tiemposTomate = tiemposLechuga = tiemposCondimentos = tiempoTotal = 0;
+
+            // Volvemos los acumuladores a su estado inicial
+            panAcumulado = tocinoAcumulado = salchichaAcumulada = mayonesaAcumulada
+                    = cebollaAcumulada = tomateAcumulado = lechugaAcumulada = condimentosAcumulados = 0;
+            
+            totalCocinera = totalCocinera = totalDogos = 0;
+            
+            simulacionDetenida = statusAydante = statusCocinero = false;
+            
             JOptionPane.showMessageDialog(null, "SIMULACION DETENIDA");
-            simulacionDetenida = false;
             lblProgreso.setVisible(false);
         } else {
             // Totales
@@ -115,6 +126,7 @@ public class Resultados {
             (condimentosAcumulados ) + " cda(s) de Aderezo"+  " en "+tiemposCondimentos+ " seg(s)\n" 
                     
             + "\n INGREDIENTES SOBRANTES: \n" +
+            "DOGOS PENDIENTES: " + inputDogos.getText() + " \n" +
             (cPan - panAcumulado) + " Piezas de Pan \n" +
             (cMayonesa - mayonesaAcumulada) + " cda(s) de mayonesa \n"+
             (cTocino - tocinoAcumulado)+ " Tiras de Tocino \n"+
@@ -127,18 +139,19 @@ public class Resultados {
             );
             
             // Reinicia Tiempos
-           tiemposMayonesa = tiemposTocino = tiemposPan = tiemposSalchicha = tiemposCebolla =
-           tiemposTomate =  tiemposLechuga = tiemposCondimentos = tiempoTotal = 0;
-           
+            tiemposMayonesa = tiemposTocino = tiemposPan = tiemposSalchicha = tiemposCebolla
+                    = tiemposTomate = tiemposLechuga = tiemposCondimentos = tiempoTotal = 0;
+
             // Volvemos los acumuladores a su estado inicial
-            panAcumulado = tocinoAcumulado = salchichaAcumulada = mayonesaAcumulada = 
-            cebollaAcumulada = tomateAcumulado = lechugaAcumulada = condimentosAcumulados = 0;
+            panAcumulado = tocinoAcumulado = salchichaAcumulada = mayonesaAcumulada
+                    = cebollaAcumulada = tomateAcumulado = lechugaAcumulada = condimentosAcumulados = 0;
             
             statusAydante = statusCocinero = false;
            
             totalCocinera = totalCocinera = totalDogos = 0;
-            desbloquearBotonesInputs(txtIngredientes, txtTiempos);
         }
+        
+        desbloquearBotonesInputs(txtIngredientes, txtTiempos);
     }
 
     // Metodo que desbloqueara todo al terminar la simulacion
