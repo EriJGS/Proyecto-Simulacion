@@ -83,6 +83,11 @@ public class MiBoton extends JButton implements ActionListener {
         int pan = Integer.parseInt(inputPan.getText());
         int salchicha = Integer.parseInt(inputSalchicha.getText());
         int hotdogs = Integer.parseInt(inputHotDogs.getText());
+        
+         // Tiempos acumulados
+        int tiempoTotal = 0, tiemposTomate = 0, tiemposCebolla = 0, tiemposLechuga = 0, 
+            tiemposMayonesa = 0, tiemposCondimentos = 0 , tiemposTocino = 0, tiemposPan =0, 
+            tiemposSalchicha = 0;
 
         if (cebolla >= 1 && tomate >= 1 && lechuga >= 1 && mayonesa >= 1 && condimentos >= 1 && tocino >= 1 && pan >= 1 && salchicha >= 1 && hotdogs >= 1) {
             return true;

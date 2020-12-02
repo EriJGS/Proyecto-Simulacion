@@ -47,6 +47,24 @@ public class Resultados {
     
     // Ingredientes sobrantes
     int cPan;
+    int cSalchicha;
+    int cTocino;
+    int cMayonesa;
+    int cCebolla;
+    int cTomate;
+    int cLechuga;
+    int cCondimentos;
+    
+    //Tiempos 
+    int tiemposMayonesa = 0,
+        tiemposTocino = 0,
+        tiemposPan = 0,
+        tiemposSalchicha = 0,
+        tiemposCebolla = 0,
+        tiemposTomate = 0,
+        tiemposLechuga = 0,
+        tiemposCondimentos = 0;
+    int tiempoTotal = 0;
     
     public void incremetarDogos() {
         int total = totalAyudante + totalCocinera;
@@ -83,28 +101,41 @@ public class Resultados {
             lblProgreso.setVisible(false);
         } else {
             // Totales
-            System.out.println("Dogos:" + totalDogos);
-            System.out.println(panAcumulado);
-            System.out.println(tocinoAcumulado);
-            System.out.println(salchichaAcumulada);
-            System.out.println(mayonesaAcumulada);
-            System.out.println(cebollaAcumulada);
-            System.out.println(tomateAcumulado);
-            System.out.println(lechugaAcumulada);
-            System.out.println(condimentosAcumulados);
+            tiempoTotal = tiemposPan+tiemposMayonesa+tiemposTocino+tiemposSalchicha+tiemposCebolla
+            +tiemposTomate+tiemposLechuga+tiemposCondimentos;
+            JOptionPane.showMessageDialog(null, "SE PREPARARON: "+totalDogos + " Hotdog(s) \n"
+            + "\n INGREDIENTES UTILIZADOS: \n" +
+            (panAcumulado ) + " Piezas de Pan" + " en " +tiemposPan+ " seg(s)\n" +
+            (mayonesaAcumulada ) + " cda(s) de mayonesa"+ " en "+tiemposMayonesa+ " seg(s)\n" +
+            (tocinoAcumulado ) + " Tiras de Tocino"+ " en "+tiemposTocino+ " seg(s)\n" +
+            (salchichaAcumulada ) + " Salchichas"+ " en "+tiemposSalchicha+ " seg(s)\n" +
+            (cebollaAcumulada ) + "/4 de Cebolla"+  " en "+tiemposCebolla+ " seg(s)\n" +
+            (tomateAcumulado ) + "/4 de Tomate"+  " en "+tiemposTomate+ " seg(s)\n" +
+            (lechugaAcumulada ) + "/12 de Lechuga" +  " en "+tiemposLechuga+ " seg(s)\n" +
+            (condimentosAcumulados ) + " cda(s) de Aderezo"+  " en "+tiemposCondimentos+ " seg(s)\n" 
+                    
+            + "\n INGREDIENTES SOBRANTES: \n" +
+            (cPan - panAcumulado) + " Piezas de Pan \n" +
+            (cMayonesa - mayonesaAcumulada) + " cda(s) de mayonesa \n"+
+            (cTocino - tocinoAcumulado)+ " Tiras de Tocino \n"+
+            (cSalchicha - salchichaAcumulada) + " Salchichas \n"+
+            (cCebolla - cebollaAcumulada)  + "/4 de Cebolla \n"+
+            (cTomate - tomateAcumulado) + "/4 de Tomate \n"+
+            (cLechuga - lechugaAcumulada) + "/12 de Lechuga \n" +
+            (cCondimentos - condimentosAcumulados) + " cda(s) de Aderezo \n" +
+             "\n Tiempo de la Simulacion: " + tiempoTotal + " Seg(s)"       
+            );
             
-            // Sobrantes
-            System.out.println("SOBRARON");
-            System.out.println("Pan: " + (cPan - panAcumulado));
-            
-            // Tiempos
-            
+            // Reinicia Tiempos
+           tiemposMayonesa = tiemposTocino = tiemposPan = tiemposSalchicha = tiemposCebolla =
+           tiemposTomate =  tiemposLechuga = tiemposCondimentos = tiempoTotal = 0;
+           
             // Volvemos los acumuladores a su estado inicial
             panAcumulado = tocinoAcumulado = salchichaAcumulada = mayonesaAcumulada = 
             cebollaAcumulada = tomateAcumulado = lechugaAcumulada = condimentosAcumulados = 0;
             
             statusAydante = statusCocinero = false;
-            JOptionPane.showMessageDialog(null, "RESULTADOS DE LA SIMULACION");
+           
             totalCocinera = totalCocinera = totalDogos = 0;
             desbloquearBotonesInputs(txtIngredientes, txtTiempos);
         }

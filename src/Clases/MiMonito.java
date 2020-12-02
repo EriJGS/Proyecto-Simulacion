@@ -124,10 +124,22 @@ public class MiMonito extends JLabel implements Runnable {
         // Le mandamos los contenedores respecto a cada proceso
         if (name == "cocinera") {
             resultados.cPan = cPan.getCantidad();
+             resultados.cMayonesa = cMayonesa.getCantidad();
+             resultados.cTocino = cTocino.getCantidad();
+             resultados.cSalchicha = cSalchicha.getCantidad();
+            
+        }
+        if (name == "ayudante") {
+            resultados.cCebolla = cCebolla.getCantidad();
+             resultados.cTomate = cTomate.getCantidad();
+             resultados.cLechuga = cLechuga.getCantidad();
+             resultados.cCondimentos = cCondimentos.getCantidad();
+            
         }
         
+      
+        
         int ciclos = hotdogs;
-        int dogosPreparados = 0;
         int x = 85;
         int TIEMPO = 1000;
         stop = false;
@@ -146,13 +158,6 @@ public class MiMonito extends JLabel implements Runnable {
         int tAplicarPan = (int) (Double.parseDouble(txtTiempos[10].getText()) * TIEMPO);
         int tPrepararSalchicha = (int) (Double.parseDouble(txtTiempos[11].getText()) * TIEMPO);
         int tAplicarSalchicha = (int) (Double.parseDouble(txtTiempos[12].getText()) * TIEMPO);
-
-        // Tiempos acumulados
-        int tiempoTotal = 0, tiemposTomate = 0, tiemposCebolla = 0, tiemposLechuga = 0, 
-            tiemposMayonesa = 0, tiemposCondimentos = 0 , tiemposTocino = 0, tiemposPan =0, 
-            tiemposSalchicha = 0;
-
-        System.out.println(tPicarTomate);
 
         for (int i = 1; i <= ciclos; i++) {
             
@@ -223,6 +228,12 @@ public class MiMonito extends JLabel implements Runnable {
                     resultados.tocinoAcumulado++;
                     resultados.salchichaAcumulada++;
                     resultados.mayonesaAcumulada++;
+                    
+                    //Acumulador de tiempos
+                   resultados.tiemposPan += (tPrepararPan + tAplicarPan)/1000;
+                   resultados.tiemposMayonesa += tAplicarMayonesa/1000;
+                   resultados.tiemposTocino += tAplicarTocino/1000;
+                   resultados.tiemposSalchicha += (tPrepararSalchicha + tAplicarSalchicha)/1000;
                 }
                 // Fin de las tareas de la cocinera
                 
@@ -268,6 +279,12 @@ public class MiMonito extends JLabel implements Runnable {
                     resultados.tomateAcumulado++;
                     resultados.lechugaAcumulada++;
                     resultados.condimentosAcumulados++;
+                    
+                    //acumular tiempos
+                    resultados.tiemposCebolla += (tPicarCebolla + tAplicarCebolla)/1000;
+                    resultados.tiemposTomate += (tPicarTomate + tAplicarTomate)/1000;
+                    resultados.tiemposLechuga += (tPicarLechuga + tAplicarLechuga)/1000;
+                    resultados.tiemposCondimentos += (tAplicarCondimentos)/1000;
                 }
                 // Fin de las tareas a realizar del ayudante
                
@@ -290,29 +307,19 @@ public class MiMonito extends JLabel implements Runnable {
         if (name == "cocinera"){
             resultados.statusCocinero = true;
             this.setBounds(85, 40, 80, 40);
-            //System.out.println("Cocinera: " + resultados );
+           
         }
-        
         if (name == "ayudante") {
             resultados.statusAydante = true;
-//            this.setBounds(30, 40, 80, 40);
-            //System.out.println("Ayudante: " + resultados);
+
         }
-           
-        System.out.println(cPan.getCantidad());
         // Indica que la simulacion termino
         if (resultados.terminaronAmbosThreads()) {
             
-            if (name == "cocinera") {
-                // Le mandas los tiempos de cocinera
-            }
-            
             if (name == "ayudante") {
                 this.setBounds(30, 40, 80, 40);
-                // Le mandas los tiempos de ayudante
             }
           
-            // Aqui pásas los parametros
             resultados.mostrarResultados();
         }
         
