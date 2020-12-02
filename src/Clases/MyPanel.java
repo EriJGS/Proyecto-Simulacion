@@ -14,7 +14,7 @@ public class MyPanel extends JPanel {
             lechugaAplicar, mayonesaAplicar, aderezoAplicar, tocinoAplicar, panPreparar,
             panAplicar, salchichaPreparar, salchichaAplicar;
     private JLabel jcomp3, jcomp22, jcomp25, jcomp26, jcomp27, jcomp28, jcomp29,
-            jcomp36, jcomp37, jcomp40, jcomp41, jcomp42, jcomp43, jcomp53, cdaM, cdaC, pzaP, pzaT, pzaS, cantC, cantT, cantL, lblProgreso;
+            jcomp36, jcomp37, jcomp40, jcomp41, jcomp42, jcomp43, jcomp53, cdaM, cdaC, pzaP, pzaT, pzaS, cantC, cantT, cantL;
     private JButton editar, guardar, cancelar, salir, nuevosInput, reset, cancelarC, stop;
     private Resultados resultados = new Resultados();
 
@@ -49,7 +49,7 @@ public class MyPanel extends JPanel {
         pzaP = new JLabel("pza.");
         cdaM = new JLabel("cda.");            // suponiendo que se necesita 1 cda de mayonesa para cada hot-dog
         cdaC = new JLabel("cda.");            // suponiendo que se necesita 1 cda de condimentos para cada hot-dog
-        lblProgreso = new JLabel("Simulacion en proceso...");
+//        lblProgreso = new JLabel("Simulacion en proceso...");
         inputCebolla = new JTextField("1");
         inputTomate = new JTextField("1");
         inputLechuga = new JTextField("1");
@@ -114,7 +114,7 @@ public class MyPanel extends JPanel {
         guisar.setBounds(255, 90, 90, 40);
         nuevosInput.setBounds(300, 10, 160, 20);
         principal.setBounds(440, 245, 100, 20);
-        lblProgreso.setBounds(510, 280, 180, 20);
+//        lblProgreso.setBounds(510, 280, 180, 20);
         jcomp3.setBounds(5, 135, 75, 25);
         cebolla.setBounds(425, 90, 65, 40);
         tomate.setBounds(480, 90, 65, 40);
@@ -231,7 +231,7 @@ public class MyPanel extends JPanel {
         add(jcomp53);
         add(calentar);
         add(guisar);
-        add(lblProgreso);
+//        add(lblProgreso);
 
         //CODIGO DATOS DE INICIO
         MiMonito[] labelsCantidades = {cebolla, tomate, lechuga, mayonesa, condimentos, salchicha, pan, tocino, calentar, guisar};
@@ -254,9 +254,9 @@ public class MyPanel extends JPanel {
             }
         });
                 
-        lblProgreso.setVisible(false);
-        lblProgreso.setBackground(Color.GREEN);
-        lblProgreso.setOpaque(true);
+//        lblProgreso.setVisible(false);
+//        lblProgreso.setBackground(Color.GREEN);
+//        lblProgreso.setOpaque(true);
         //CODIGO DEL THREAD SIMULACION
         principal.innit();
         persona.innit();
@@ -277,7 +277,7 @@ public class MyPanel extends JPanel {
         principal.monito2 = persona2;
         principal.txtIngredientes = inputs;
         principal.txtTiempos = configuraciones;
-        principal.lblProgreso = lblProgreso;
+//        principal.lblProgreso = lblProgreso;
         principal.addActionListener(principal);
         
         // Pasar botones a MiMonito para desactivar/activar al "comenzar"
@@ -300,7 +300,7 @@ public class MyPanel extends JPanel {
         resultados.btnResetC = cancelarC;
         resultados.btnGuardar = guardar;
         resultados.btnStop = stop;
-        resultados.lblProgreso = lblProgreso;
+//        resultados.lblProgreso = lblProgreso;
         resultados.inputDogos = inputCantidad;
 
         
@@ -425,7 +425,6 @@ public class MyPanel extends JPanel {
 
     private void setConfiguracionDefault(JTextField[] configuraciones) {
         // poner tiempos originales
-/*
         tomatePicar.setText("18.5");
         cebollaPicar.setText("21.25");
         lechugaPicar.setText("17.3");
@@ -439,20 +438,6 @@ public class MyPanel extends JPanel {
         panAplicar.setText("1");
         salchichaPreparar.setText("105");
         salchichaAplicar.setText("4.75");
-*/
-        tomatePicar.setText("1");
-        cebollaPicar.setText("1");
-        lechugaPicar.setText("1");
-        tomateAplicar.setText("1");
-        cebollaAplicar.setText("1");
-        lechugaAplicar.setText("1");
-        mayonesaAplicar.setText("1");
-        aderezoAplicar.setText("1");
-        tocinoAplicar.setText("1");
-        panPreparar.setText("1");
-        panAplicar.setText("1");
-        salchichaPreparar.setText("1");
-        salchichaAplicar.setText("1");
 
         for (int i = 0; i < configuraciones.length; i++) {
             configuraciones[i].setBackground(Color.white);

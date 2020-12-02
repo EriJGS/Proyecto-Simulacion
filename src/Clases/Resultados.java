@@ -29,7 +29,7 @@ public class Resultados {
     JButton btnReset;
     JButton btnGuardar;
     JButton btnStop;
-    JLabel lblProgreso;
+//    JLabel lblProgreso;
     JTextField inputDogos;
 
     int totalCocinera, totalAyudante, totalDogos;
@@ -86,7 +86,7 @@ public class Resultados {
     // Verificara que ambos hayan acabado su chamba 
     public boolean terminaronAmbosThreads() {
         if (statusCocinero && statusAydante) {
-            lblProgreso.setVisible(false);
+//            lblProgreso.setVisible(false);
             return true;
         }
         return false;
@@ -109,7 +109,7 @@ public class Resultados {
             simulacionDetenida = statusAydante = statusCocinero = false;
             
             JOptionPane.showMessageDialog(null, "SIMULACION DETENIDA");
-            lblProgreso.setVisible(false);
+//            lblProgreso.setVisible(false);
         } else {
             // Totales
             tiempoTotal = tiemposPan+tiemposMayonesa+tiemposTocino+tiemposSalchicha+tiemposCebolla

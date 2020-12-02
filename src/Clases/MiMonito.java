@@ -15,7 +15,7 @@ public class MiMonito extends JLabel implements Runnable {
     private String name, url;
     private ImageIcon imagenIcon;
     JTextField[] txtIngredientes, txtTiempos;
-    JLabel lblProgreso;
+//    JLabel lblProgreso;
     Resultados resultados;
     
 //    public Contenedores cCebolla, cTomate, cLechuga, cMayonesa, cCondimentos, cTocino, 
